@@ -1,0 +1,24 @@
+body {
+    background: #ffffff;
+    font-family: sans-serif;
+    font-weight: normal;
+    margin: 0px;
+    padding: 10px;
+}
+
+.invoicedemo {
+    display: flex;
+}
+
+.invoicedemo section {
+    flex: 1 1 auto;
+    border: 1px solid rgb(226, 226, 226);
+    background: #FCFCFC;
+    border-radius: 5px;
+    padding: 10px 20px 20px 20px;
+    margin: 10px;
+}
+
+.invoicedemo section.list {
+    flex: 0 1 auto;
+}
