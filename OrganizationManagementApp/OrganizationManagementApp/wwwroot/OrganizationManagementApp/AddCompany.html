@@ -2,15 +2,14 @@
 
 <template>
     <template is="dom-bind">
-
-            <div class="company-name">
-                <h3 style="color:#008CBA">Corporation Manager Beta</h3>
-                <p>Version 1.0</p>
-            </div>
+        <div class="company-name">
+            <h3 style="color:#008CBA">Corporation Management App</h3>
+            <p>Version 1.0</p>
+        </div>
         <fieldset style="width:59%">
             <h3>Create New Company</h3>
             <div class="form-group" style="margin-right: 10px; float: left">
-                <input type="text" value="{{model.Name$::input}}" placeholder="Employee Name" style="padding: 7px">
+                <input type="text" value="{{model.Name$::input}}" placeholder="Company Name" style="padding: 7px">
             </div>
             <div class="form-group">
                 <button class="btn btn-info" value="{{model.AddCompanyTrigger$::click}}" onmousedown="++this.value" style="padding-bottom:10px">Create</button>
