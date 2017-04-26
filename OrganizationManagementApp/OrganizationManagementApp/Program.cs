@@ -7,7 +7,23 @@ namespace OrganizationManagementApp
     {
         static void Main()
         {
-            Handle.GET("/invoicedemo", () => {
+            Db.Transact(() => {
+               var person = Db.SQL<Company>("select c from Company c").First;
+               if (person == null)
+                {
+                    new Company
+                    {
+                        Name = "Tauhid Ahmed",
+                        CompanyNo = 1
+                    };
+                }
+            });
+
+            Application.Current.Use(new HtmlFromJsonProvider());
+            Application.Current.Use(new PartialToStandaloneHtmlProvider());
+
+
+            Handle.GET("/", () => {
                 MasterPage master;
 
                 if (Session.Current != null && Session.Current.Data != null)
@@ -18,81 +34,78 @@ namespace OrganizationManagementApp
                 {
                     master = new MasterPage();
 
-                    if (Session.Current != null)
-                    {
-                        master.Html = "/InvoiceDemo/LauncherWrapperPage.html";
-                        master.Session = Session.Current;
-                    }
-                    else
-                    {
-                        master.Html = "/InvoiceDemo/MasterPage.html";
-                        master.Session = new Session(SessionOptions.PatchVersioning);
-                    }
+                    master.Html = "/OrganizationManagementApp/MasterPage.html";
+                    master.Session = new Session(SessionOptions.PatchVersioning);
+                    
 
-                    master.RecentInvoices = new InvoicesPage()
+                    master.RecentInvoices = new CompanyList()
                     {
-                        Html = "/InvoiceDemo/InvoicesPage.html"
+                        Html = "/OrganizationManagementApp/CompanyList.html"
                     };
                 }
 
-            ((InvoicesPage)master.RecentInvoices).RefreshData();
+            ((CompanyList)master.RecentInvoices).RefreshData();
                 master.FocusedInvoice = null;
 
                 return master;
             });
 
-            //Handle.GET("/invoicedemo/invoices/{?}", (int InvoiceNo) => {
-            //    MasterPage master = Self.GET<MasterPage>("/invoicedemo");
-            //    master.FocusedInvoice = Db.Scope<InvoicePage>(() => {
-            //        var page = new InvoicePage()
-            //        {
-            //            Html = "/InvoiceDemo/InvoicePage.html",
-            //            Data = Db.SQL<Invoice>("SELECT i FROM Invoice i WHERE InvoiceNo = ?", InvoiceNo).First
-            //        };
-
-            //        page.Saved += (s, a) => {
-            //            ((InvoicesPage)master.RecentInvoices).RefreshData();
-            //        };
-
-            //        page.Deleted += (s, a) => {
-            //            ((InvoicesPage)master.RecentInvoices).RefreshData();
-            //        };
-
-            //        return page;
-            //    });
-            //    return master;
-            //});
-
-            //Handle.GET("/invoicedemo/new-invoice", () => {
-            //    MasterPage master = Self.GET<MasterPage>("/invoicedemo");
-            //    master.FocusedInvoice = Db.Scope<InvoicePage>(() => {
-            //        var page = new InvoicePage()
-            //        {
-            //            Html = "/InvoiceDemo/InvoicePage.html",
-            //            Data = new Invoice()
-            //        };
-
-            //        page.Saved += (s, a) => {
-            //            ((InvoicesPage)master.RecentInvoices).RefreshData();
-            //        };
-
-            //        page.Deleted += (s, a) => {
-            //            ((InvoicesPage)master.RecentInvoices).RefreshData();
-            //        };
-
-            //        return page;
-            //    });
-            //    return master;
-            //});
-
-            Handle.GET("/invoicedemo/menu", () => {
-                MasterPage master = Self.GET<MasterPage>("/invoicedemo");
-                master.ShowOwnTopBarMenu = false;
-                return new Page() { Html = "/InvoiceDemo/AppMenuPage.html" };
+            Handle.GET("/companies/{?}", (int CompanyNo) =>
+            {
+                MasterPage master = Self.GET<MasterPage>("/");
+                master.FocusedInvoice = Db.Scope<CompanyDetails>(() =>
+                {
+                    var page = new CompanyDetails()
+                    {
+                        Html = "/OrganizationManagementApp/CompanyDetails.html",
+                        Data = Db.SQL<Company>("SELECT c FROM Company c WHERE c.CompanyNo=?", CompanyNo).First,
+                        AddEmployee = new AddEmployee()
+                        {
+                            Html = "/OrganizationManagementApp/AddEmployee.html",
+                            Data = new Person
+                            {
+                                CompanyNo = CompanyNo,
+                                PersonName = ""
+                            }
+                        }
+                    };
+                    
+                    return page;
+                });
+                return master;
             });
 
-            UriMapping.Map("/invoicedemo/menu", UriMapping.MappingUriPrefix + "/menu");
-            UriMapping.Map("/invoicedemo/app-name", UriMapping.MappingUriPrefix + "/app-name");
+            Handle.GET("/new-company", () =>
+            {
+                MasterPage master = Self.GET<MasterPage>("/");
+                master.FocusedInvoice = Db.Scope<AddCompany>(() =>
+                {
+                    var page = new AddCompany()
+                    {
+                        Html = "/OrganizationManagementApp/AddCompany.html",
+                        Data = new Company
+                        {
+                            Name= ""
+                        }
+                    };
+
+                    page.Saved += (s, a) =>
+                    {
+                        ((CompanyList)master.RecentInvoices).RefreshData();
+                    };
+
+                    return page;
+                });
+                return master;
+            });
+
+            //Handle.GET("/invoicedemo/menu", () => {
+            //    MasterPage master = Self.GET<MasterPage>("/invoicedemo");
+            //    master.ShowOwnTopBarMenu = false;
+            //    return new Page() { Html = "/InvoiceDemo/AppMenuPage.html" };
+            //});
+
+            //UriMapping.Map("/invoicedemo/menu", UriMapping.MappingUriPrefix + "/menu");
         }
     }
 }

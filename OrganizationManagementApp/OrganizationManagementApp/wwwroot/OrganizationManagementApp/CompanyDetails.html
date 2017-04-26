@@ -1,0 +1,38 @@
+﻿<link rel="import" href="/sys/polymer/polymer.html">
+
+<template>
+    <template is="dom-bind">
+        <div class="company-info">
+            <div class="company-image">
+                <img src="/OrganizationManagementApp/company-icon.png" style="height:60px"/>
+            </div>
+            <div class="company-name">
+                <h3 style="color:#008CBA">{{model.Name}}</h3>
+                <p>real estate</p>
+            </div>
+        </div>
+        <div class="add-employee">
+            <template is="imported-template" content$="{{model.AddEmployee.Html}}" model="{{model.AddEmployee}}">
+            </template>
+        </div>
+        <hr>
+        <div class="invoice-items">
+            <div class="invoice-items-head">
+                <div class="invoice-item-cell">Name</div>
+                <div class="invoice-item-cell">No. of Sale</div>
+                <div class="invoice-item-cell">Commision</div>
+                <div class="invoice-item-cell">Avg Commision</div>
+            </div>
+            <div class="invoice-items-body">
+                <template is="dom-repeat" items="{{model.PersonList}}">
+                    <div class="invoice-item">
+                        <div class="invoice-item-cell readonlycell"><a href="{{item.Url}}">{{item.PersonName}}</a></div>
+                        <div class="invoice-item-cell readonlycell">{{item.TotalSale}}</div>
+                        <div class="invoice-item-cell readonlycell">{{item.TotalCommission}}</div>
+                        <div class="invoice-item-cell readonlycell">{{item.AvgCommission}}</div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </template>
+</template>

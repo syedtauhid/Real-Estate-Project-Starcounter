@@ -1,8 +1,9 @@
+using OrganizationManagementApp;
 using Starcounter;
 
 partial class MasterPage : Page {
     public void RefreshList() {
-        InvoicesPage recentInvoices = (InvoicesPage)RecentInvoices;
-        recentInvoices.Invoices = Db.SQL("SELECT i FROM Invoice i");
+        CompanyList recentInvoices = (CompanyList)RecentInvoices;
+        recentInvoices.Companies = Db.SQL("SELECT i FROM Company i");
     }
 }

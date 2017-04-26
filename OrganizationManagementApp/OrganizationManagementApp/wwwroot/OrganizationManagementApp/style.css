@@ -1,3 +1,18 @@
+.company-image {
+    float: left;
+    width: 6%;
+}
+
+.company-name {
+    float: left;
+}
+
+.company-name p{
+    margin-top: -13px;
+    color: #555555;
+    margin-left: 5px;
+}
+
 .invoicedemo ul.autocomplete {
     display: block;
     background-color: white;
@@ -152,6 +167,7 @@
     border-style: solid;
     border-color: #cccccc;
     background-color: #ffffff;
+    text-align: left !important;
 }
 
 .invoicedemo .invoice-items-head .invoice-item-cell:first-child {
@@ -161,7 +177,7 @@
 
 .invoicedemo .invoice-items-head .invoice-item-cell:last-child,
 .invoicedemo .invoice-items-foot .invoice-item-cell:last-child {
-    text-align: right;
+    text-align: left;
     padding-right: 10px;
 }
 

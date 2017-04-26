@@ -1,0 +1,16 @@
+{
+  "Html": "",
+  "CompanyNo": 0,
+  "AddEmployee": {},
+  "Name": "",
+  "PersonList": [
+    {
+      "PersonNo": 0,
+      "PersonName": "",
+      "TotalSale": 0,
+      "TotalCommission":  0,
+      "AvgCommission":  0,
+      "Url": ""
+    }
+  ]
+}

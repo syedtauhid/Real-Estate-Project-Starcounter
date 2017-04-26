@@ -62,6 +62,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddCompany.json.cs">
+      <DependentUpon>AddCompany.json</DependentUpon>
+    </Compile>
+    <Compile Include="AddEmployee.json.cs">
+      <DependentUpon>AddEmployee.json</DependentUpon>
+    </Compile>
+    <Compile Include="CompanyDetails.json.cs">
+      <DependentUpon>CompanyDetails.json</DependentUpon>
+    </Compile>
+    <Compile Include="CompanyList.json.cs">
+      <DependentUpon>CompanyList.json</DependentUpon>
+    </Compile>
     <Compile Include="Database\Database.cs" />
     <Compile Include="MasterPage.json.cs">
       <DependentUpon>MasterPage.json</DependentUpon>
@@ -69,16 +81,34 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <TypedJSON Include="MasterPage.json">
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>
   </ItemGroup>
   <ItemGroup>
+    <TypedJSON Include="CompanyDetails.json">
+      <Generator>MsBuild:Compile</Generator>
+    </TypedJSON>
+    <TypedJSON Include="AddEmployee.json">
+      <Generator>MsBuild:Compile</Generator>
+    </TypedJSON>
+    <TypedJSON Include="AddCompany.json">
+      <Generator>MsBuild:Compile</Generator>
+    </TypedJSON>
+    <None Include="wwwroot\OrganizationManagementApp\CompanyList.html" />
+    <None Include="wwwroot\OrganizationManagementApp\CompanyDetails.html" />
+    <None Include="wwwroot\OrganizationManagementApp\AddEmployee.html" />
+    <None Include="wwwroot\OrganizationManagementApp\AddCompany.html" />
+    <Content Include="wwwroot\OrganizationManagementApp\company-icon.png" />
     <Content Include="wwwroot\OrganizationManagementApp\MasterPage.html" />
     <Content Include="wwwroot\OrganizationManagementApp\masterPage.css" />
     <Content Include="wwwroot\OrganizationManagementApp\style.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypedJSON Include="CompanyList.json">
+      <Generator>MsBuild:Compile</Generator>
+    </TypedJSON>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(StarcounterBin)\Starcounter.MsBuild.targets" />
