@@ -15,7 +15,7 @@ Simple Corporation Management App using Starcounter. Features include:
 
 ## Home Page
 
-Open `[http://localhost:8080/](http://localhost:8080/)` to go to the Dashboard of the application. It contains :
+Open [http://localhost:8080/](http://localhost:8080/) to go to the Dashboard of the application. It contains :
 - Company list.
 - Welcome Page
 Screenshot:
@@ -23,7 +23,7 @@ Screenshot:
 ![image](docs/home-page.png)
 
 ## Add Company
-Open `[http://localhost:8080/new-company](http://localhost:8080/new-company)` or click on `Add Company` from the menu to add a Company.
+Open [http://localhost:8080/new-company](http://localhost:8080/new-company) or click on `Add Company` from the menu to add a Company.
 
 Screenshot:
 
