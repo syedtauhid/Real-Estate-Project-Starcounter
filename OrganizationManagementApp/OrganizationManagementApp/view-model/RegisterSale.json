@@ -1,3 +1,14 @@
 {
-  "Html": ""
+  "Html": "",
+  "PersonNo": 0,
+  "Street$": "",
+  "City$": "",
+  "Country$": "",
+  "Zip$": "",
+  "Address": "",
+  "Price$": 0,
+  "Commission$": 0,
+  "Saler": {},
+  "Date$": "",
+  "RegisterSaleTrigger$": 0
 }

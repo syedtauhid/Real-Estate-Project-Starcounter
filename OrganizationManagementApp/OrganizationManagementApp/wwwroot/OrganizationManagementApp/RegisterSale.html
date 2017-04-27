@@ -2,6 +2,39 @@
 
 <template>
     <template is="dom-bind">
-        
+        <fieldset>
+            <h3>Register New Sale</h3>
+            <h5>Home info</h5>
+            <div class="form-group" style="margin-right: 10px; float: left">
+                <input type="text" value="{{model.Street$::input}}" placeholder="Street Address" style="padding: 7px">
+            </div>
+            <div class="form-group" style="margin-right: 10px; float: left">
+                <input type="text" value="{{model.Zip$::input}}" placeholder="Zip Code" style="padding: 7px">
+            </div>
+            <div class="form-group" style="margin-right: 10px; float: left">
+                <input type="text" value="{{model.City$::input}}" placeholder="City" style="padding: 7px">
+            </div>
+            <div class="form-group" style="margin-right: 10px; float: left">
+                <input type="text" value="{{model.Country$::input}}" placeholder="Country" style="padding: 7px">
+            </div>
+            <div class="clear"></div>
+            <h5>Transaction info</h5>
+            <div class="form-group" style="margin-right: 10px; float: left">
+                <label for="date">Date:</label>
+                <input type="text" value="{{model.Date$::input}}" placeholder="2017-26-04" style="padding: 7px" id="date">
+            </div>
+            <div class="form-group" style="margin-right: 10px; float: left">
+                <label for="price">Price:</label>
+                <input type="number" value="{{model.Price$::input}}" placeholder="Price" style="padding: 7px" id="price">
+            </div>
+            <div class="form-group" style="margin-right: 10px; float: left">
+                <label for="commission">Commission:</label>
+                <input type="number" value="{{model.Commission$::input}}" placeholder="Commission" style="padding: 7px" id="commission">
+            </div>
+            <div class="clear"></div>
+            <div class="form-group">
+                <button class="btn btn-info" value="{{model.RegisterSaleTrigger$::click}}" onmousedown="++this.value" style="padding-bottom:10px">Register Sale</button>
+            </div>
+        </fieldset>
     </template>
 </template>

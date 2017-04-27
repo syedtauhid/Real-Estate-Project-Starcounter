@@ -2,6 +2,68 @@
 
 <template>
     <template is="dom-bind">
-        
+        <div class="company-info">
+            <div class="company-image">
+                <img src="/OrganizationManagementApp/company-icon.png" style="height:60px" />
+            </div>
+            <div class="company-name">
+                <h3 style="color:#008CBA">{{model.PersonName$}}</h3>
+                <p>{{model.Email$}}</p>
+            </div>
+        </div>
+        <hr>
+        <div id="edit-profile">
+            <fieldset>
+                <h3>Update Profile Info</h3>
+                <div class="form-group" style="margin-right: 10px; float: left">
+                    <input type="text" value="{{model.PersonName$::input}}" placeholder="Full Name" style="padding: 7px">
+                </div>
+                <div class="form-group" style="margin-right: 10px; float: left">
+                    <input type="text" value="{{model.Email$::input}}" placeholder="Email" style="padding: 7px">
+                </div>
+                <div class="form-group" style="margin-right: 10px; float: left">
+                    <input type="text" value="{{model.Zip$::input}}" placeholder="Zip Code" style="padding: 7px">
+                </div>
+                <div class="clear"></div>
+                <div class="form-group" style="margin-right: 10px; float: left">
+                    <input type="text" value="{{model.Street$::input}}" placeholder="Street Address" style="padding: 7px">
+                </div>
+                <div class="form-group" style="margin-right: 10px; float: left">
+                    <input type="text" value="{{model.City$::input}}" placeholder="City" style="padding: 7px">
+                </div>
+                <div class="form-group" style="margin-right: 10px; float: left">
+                    <input type="text" value="{{model.Country$::input}}" placeholder="Country" style="padding: 7px">
+                </div>
+                <div class="clear"></div>
+                <div class="form-group">
+                    <button class="btn btn-info" value="{{model.UpdateProfileTrigger$::click}}" onmousedown="++this.value" style="padding-bottom:10px">Save</button>
+                </div>
+                <p>Address: {{model.Address}}</p>
+            </fieldset>
+        </div>
+        <hr>
+        <div class="add-employee">
+            <template is="imported-template" content$="{{model.AddSale.Html}}" model="{{model.AddSale}}"></template>
+        </div>
+        <hr>
+        <h3>List of Transactions</h3>
+        <div class="invoice-items">
+            <div class="invoice-items-head">
+                <div class="invoice-item-cell">Date</div>
+                <div class="invoice-item-cell">Price</div>
+                <div class="invoice-item-cell">Commission</div>
+                <div class="invoice-item-cell">Address</div>
+            </div>
+            <div class="invoice-items-body">
+                <template is="dom-repeat" items="{{model.SalesRecord}}">
+                    <div class="invoice-item">
+                        <div class="invoice-item-cell readonlycell">{{item.Date}}</div>
+                        <div class="invoice-item-cell readonlycell">{{item.Price}}</div>
+                        <div class="invoice-item-cell readonlycell">{{item.Commission}}</div>
+                        <div class="invoice-item-cell readonlycell">{{item.Address}}</div>
+                    </div>
+                </template>
+            </div>
+        </div>
     </template>
 </template>

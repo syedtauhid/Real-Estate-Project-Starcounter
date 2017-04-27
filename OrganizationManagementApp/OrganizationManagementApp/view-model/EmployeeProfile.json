@@ -5,9 +5,10 @@
   "Street$": "",
   "City$": "",
   "Country$": "",
-  "Zip$": 0,
+  "Zip$": "",
   "Email$": "",
   "Address": "",
+  "UpdateProfileTrigger$": 0,
   "AddSale": {},
   "SalesRecord": [
     {

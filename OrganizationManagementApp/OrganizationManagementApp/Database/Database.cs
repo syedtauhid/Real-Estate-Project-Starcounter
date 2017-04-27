@@ -1,4 +1,5 @@
-﻿using Starcounter;
+﻿using System;
+using Starcounter;
 
 [Database]
 public class Organization
@@ -23,12 +24,12 @@ public class Person
     public string PersonName;
     public string Street;
     public string City;
-    public int Zip;
+    public string Zip;
     public string Country;
     public string Email;
     public decimal TotalSale => Db.SQL<long>("SELECT COUNT(s.Saler) FROM Sales s WHERE s.Saler=?", this).First;
     public decimal TotalCommission => Db.SQL<decimal>("SELECT SUM(s.Commission) FROM Sales s WHERE s.Saler=?", this).First;
-    public QueryResultRows<Sales> SalesRecord => Db.SQL<Sales>("SELECT s FROM Sales s WHERE s.Saler=?", this);
+    public QueryResultRows<Sales> SalesRecord => Db.SQL<Sales>("SELECT s FROM Sales s WHERE NOT s.Price=? AND s.Saler=?", 0, this);
 
     public decimal AvgCommission
     {
@@ -36,6 +37,11 @@ public class Person
         {
             return TotalSale != 0 ? TotalCommission / TotalSale : 0 ;
         }
+    }
+
+    public static explicit operator Person(Json v)
+    {
+        throw new NotImplementedException();
     }
 }
 
@@ -45,10 +51,10 @@ public class Sales
     public Person Saler;
     public string Street;
     public string City;
-    public int Zip;
+    public string Zip;
     public string Country;
     public decimal Price;
     public decimal Commission;
     public string Date;
-    public string Address => Street + ", " + Zip +" "+ City + " " + Country;
+    public string Address => Street + " " + Zip +" "+ City + " " + Country;
 }

@@ -1,3 +1,8 @@
+.clear {
+    height: 20px;
+    clear: both;
+}
+
 .company-image {
     float: left;
     width: 6%;
@@ -163,7 +168,6 @@
     display: table-cell;
     border-width: 1px;
     padding: 0px;
-    margin: 0px;
     border-style: solid;
     border-color: #cccccc;
     background-color: #ffffff;

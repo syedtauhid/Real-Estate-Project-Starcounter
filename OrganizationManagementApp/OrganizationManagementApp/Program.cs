@@ -8,17 +8,17 @@ namespace OrganizationManagementApp
     {
         static void Main()
         {
-            Db.Transact(() => {
-               var person = Db.SQL<Company>("select c from Company c").First;
-               if (person == null)
-                {
-                    new Company
-                    {
-                        Name = "Tauhid Ahmed",
-                        CompanyNo = 1
-                    };
-                }
-            });
+            //Db.Transact(() => {
+            //   var person = Db.SQL<Company>("select c from Company c").First;
+            //   if (person == null)
+            //    {
+            //        new Company
+            //        {
+            //            Name = "Tauhid Ahmed",
+            //            CompanyNo = 1
+            //        };
+            //    }
+            //});
 
             Application.Current.Use(new HtmlFromJsonProvider());
             Application.Current.Use(new PartialToStandaloneHtmlProvider());
@@ -45,34 +45,9 @@ namespace OrganizationManagementApp
                     };
                 }
 
-            ((CompanyList)master.RecentInvoices).RefreshData();
+                ((CompanyList)master.RecentInvoices).RefreshData();
                 master.FocusedInvoice = null;
 
-                return master;
-            });
-
-            Handle.GET("/companies/{?}", (int CompanyNo) =>
-            {
-                MasterPage master = Self.GET<MasterPage>("/");
-                master.FocusedInvoice = Db.Scope<CompanyDetails>(() =>
-                {
-                    var page = new CompanyDetails()
-                    {
-                        Html = "/OrganizationManagementApp/CompanyDetails.html",
-                        Data = Db.SQL<Company>("SELECT c FROM Company c WHERE c.CompanyNo=?", CompanyNo).First,
-                        AddEmployee = new AddEmployee()
-                        {
-                            Html = "/OrganizationManagementApp/AddEmployee.html",
-                            Data = new Person
-                            {
-                                CompanyNo = CompanyNo,
-                                PersonName = ""
-                            }
-                        }
-                    };
-                    
-                    return page;
-                });
                 return master;
             });
 
@@ -86,7 +61,7 @@ namespace OrganizationManagementApp
                         Html = "/OrganizationManagementApp/AddCompany.html",
                         Data = new Company
                         {
-                            Name= ""
+                            Name = string.Empty
                         }
                     };
 
@@ -100,10 +75,43 @@ namespace OrganizationManagementApp
                 return master;
             });
 
+            Handle.GET("/companies/{?}", (int CompanyNo) =>
+            {
+                MasterPage master = Self.GET<MasterPage>("/");
+                master.FocusedInvoice = Db.Scope<CompanyDetails>(() =>
+                {
+                    var newEmployee = new AddEmployee()
+                    {
+                        Html = "/OrganizationManagementApp/AddEmployee.html",
+                        Data = new Person
+                        {
+                            CompanyNo = CompanyNo,
+                            PersonName = string.Empty
+                        }
+                    };
+
+                    newEmployee.Saved += (s, a) =>
+                    {
+                        ((CompanyDetails)master.FocusedInvoice).RefreshData();
+                    };
+
+                    var page = new CompanyDetails()
+                    {
+                        Html = "/OrganizationManagementApp/CompanyDetails.html",
+                        Data = Db.SQL<Company>("SELECT c FROM Company c WHERE c.CompanyNo=?", CompanyNo).First,
+                        AddEmployee = newEmployee
+                    };
+
+                    return page;
+                });
+
+                return master;
+            });
+
             Handle.GET("/employee/{?}/details", (int PersonNo) =>
             {
                 MasterPage master = Self.GET<MasterPage>("/");
-                master.FocusedInvoice = Db.Scope<EmployeeProfile>(() =>
+                master.FocusedInvoice = Db.Scope(() =>
                 {
                     var person = Db.SQL<Person>("SELECT p FROM Person p WHERE p.PersonNo=?", PersonNo).First;
                     var page = new EmployeeProfile()
@@ -115,7 +123,8 @@ namespace OrganizationManagementApp
                             Data = new Sales
                             {
                                 Saler = person
-                            }
+                            },
+                            PersonNo = PersonNo
                         }
                     };
 
@@ -123,14 +132,6 @@ namespace OrganizationManagementApp
                 });
                 return master;
             });
-
-            //Handle.GET("/invoicedemo/menu", () => {
-            //    MasterPage master = Self.GET<MasterPage>("/invoicedemo");
-            //    master.ShowOwnTopBarMenu = false;
-            //    return new Page() { Html = "/InvoiceDemo/AppMenuPage.html" };
-            //});
-
-            //UriMapping.Map("/invoicedemo/menu", UriMapping.MappingUriPrefix + "/menu");
         }
     }
 }

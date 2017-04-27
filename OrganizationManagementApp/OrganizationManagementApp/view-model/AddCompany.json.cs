@@ -14,7 +14,7 @@ namespace OrganizationManagementApp
             OnSaved();
             Data = new Company
             {
-                Name = ""
+                Name = string.Empty
             };
         }
 
