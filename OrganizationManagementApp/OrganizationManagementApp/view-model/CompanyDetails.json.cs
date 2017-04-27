@@ -10,7 +10,7 @@ namespace OrganizationManagementApp
             protected override void OnData()
             {
                 base.OnData();
-                this.Url = string.Format("/companies/{0}", this.PersonNo);
+                this.Url = string.Format("/employee/{?}/details", this.PersonNo);
             }
         }
     }

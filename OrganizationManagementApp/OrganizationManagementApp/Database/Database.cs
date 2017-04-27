@@ -23,11 +23,12 @@ public class Person
     public string PersonName;
     public string Street;
     public string City;
+    public int Zip;
     public string Country;
     public string Email;
     public decimal TotalSale => Db.SQL<long>("SELECT COUNT(s.Saler) FROM Sales s WHERE s.Saler=?", this).First;
     public decimal TotalCommission => Db.SQL<decimal>("SELECT SUM(s.Commission) FROM Sales s WHERE s.Saler=?", this).First;
-    public QueryResultRows<Sales> Sales => Db.SQL<Sales>("SELECT s FROM Sales s WHERE s.Saler=?", this);
+    public QueryResultRows<Sales> SalesRecord => Db.SQL<Sales>("SELECT s FROM Sales s WHERE s.Saler=?", this);
 
     public decimal AvgCommission
     {
@@ -44,8 +45,10 @@ public class Sales
     public Person Saler;
     public string Street;
     public string City;
+    public int Zip;
     public string Country;
     public decimal Price;
     public decimal Commission;
     public string Date;
+    public string Address => Street + ", " + Zip +" "+ City + " " + Country;
 }

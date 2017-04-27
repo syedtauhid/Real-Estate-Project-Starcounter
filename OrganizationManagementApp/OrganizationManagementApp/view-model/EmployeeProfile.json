@@ -1,0 +1,21 @@
+{
+  "Html": "/OrganizationManagementApp/EmployeeProfile.html",
+  "PersonNo": 0,
+  "PersonName$": "",
+  "Street$": "",
+  "City$": "",
+  "Country$": "",
+  "Zip$": 0,
+  "Email$": "",
+  "Address": "",
+  "AddSale": {},
+  "SalesRecord": [
+    {
+      "Date": "",
+      "Price": 0,
+      "Commission": 0,
+      "Address": ""
+    }
+  ]
+
+}

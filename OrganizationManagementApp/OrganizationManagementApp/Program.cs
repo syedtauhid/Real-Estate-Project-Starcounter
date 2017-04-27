@@ -1,5 +1,6 @@
 ﻿using System;
 using Starcounter;
+using OrganizationManagementApp.view_model;
 
 namespace OrganizationManagementApp
 {
@@ -92,6 +93,30 @@ namespace OrganizationManagementApp
                     page.Saved += (s, a) =>
                     {
                         ((CompanyList)master.RecentInvoices).RefreshData();
+                    };
+
+                    return page;
+                });
+                return master;
+            });
+
+            Handle.GET("/employee/{?}/details", (int PersonNo) =>
+            {
+                MasterPage master = Self.GET<MasterPage>("/");
+                master.FocusedInvoice = Db.Scope<EmployeeProfile>(() =>
+                {
+                    var person = Db.SQL<Person>("SELECT p FROM Person p WHERE p.PersonNo=?", PersonNo).First;
+                    var page = new EmployeeProfile()
+                    {
+                        Data = person,
+                        AddSale = new RegisterSale()
+                        {
+                            Html = "/OrganizationManagementApp/RegisterSale.html",
+                            Data = new Sales
+                            {
+                                Saler = person
+                            }
+                        }
                     };
 
                     return page;

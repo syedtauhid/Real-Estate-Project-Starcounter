@@ -62,38 +62,51 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddCompany.json.cs">
+    <Compile Include="view-model\AddCompany.json.cs">
       <DependentUpon>AddCompany.json</DependentUpon>
     </Compile>
-    <Compile Include="AddEmployee.json.cs">
+    <Compile Include="view-model\AddEmployee.json.cs">
       <DependentUpon>AddEmployee.json</DependentUpon>
     </Compile>
-    <Compile Include="CompanyDetails.json.cs">
+    <Compile Include="view-model\CompanyDetails.json.cs">
       <DependentUpon>CompanyDetails.json</DependentUpon>
     </Compile>
-    <Compile Include="CompanyList.json.cs">
+    <Compile Include="view-model\CompanyList.json.cs">
       <DependentUpon>CompanyList.json</DependentUpon>
     </Compile>
     <Compile Include="Database\Database.cs" />
-    <Compile Include="MasterPage.json.cs">
+    <Compile Include="view-model\MasterPage.json.cs">
       <DependentUpon>MasterPage.json</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="view-model\EmployeeProfile.json.cs">
+      <DependentUpon>EmployeeProfile.json</DependentUpon>
+    </Compile>
+    <Compile Include="view-model\RegisterSale.json.cs">
+      <DependentUpon>RegisterSale.json</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <TypedJSON Include="MasterPage.json">
+    <TypedJSON Include="view-model\MasterPage.json">
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>
   </ItemGroup>
   <ItemGroup>
-    <TypedJSON Include="CompanyDetails.json">
+    <TypedJSON Include="view-model\EmployeeProfile.json">
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>
-    <TypedJSON Include="AddEmployee.json">
+    <TypedJSON Include="view-model\RegisterSale.json">
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>
-    <TypedJSON Include="AddCompany.json">
+    <None Include="wwwroot\OrganizationManagementApp\EmployeeProfile.html" />
+    <TypedJSON Include="view-model\CompanyDetails.json">
+      <Generator>MsBuild:Compile</Generator>
+    </TypedJSON>
+    <TypedJSON Include="view-model\AddEmployee.json">
+      <Generator>MsBuild:Compile</Generator>
+    </TypedJSON>
+    <TypedJSON Include="view-model\AddCompany.json">
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>
     <None Include="wwwroot\OrganizationManagementApp\CompanyList.html" />
@@ -103,10 +116,11 @@
     <Content Include="wwwroot\OrganizationManagementApp\company-icon.png" />
     <Content Include="wwwroot\OrganizationManagementApp\MasterPage.html" />
     <Content Include="wwwroot\OrganizationManagementApp\masterPage.css" />
+    <None Include="wwwroot\OrganizationManagementApp\RegisterSale.html" />
     <Content Include="wwwroot\OrganizationManagementApp\style.css" />
   </ItemGroup>
   <ItemGroup>
-    <TypedJSON Include="CompanyList.json">
+    <TypedJSON Include="view-model\CompanyList.json">
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>
   </ItemGroup>
