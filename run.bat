@@ -1,5 +1,5 @@
 @ECHO OFF
 
-IF "%CONFIGURATION%"=="" SET CONFIGURATION=Debug
+IF "%CONFIGURATION%"=="" SET CONFIGURATION=Release
 
-star --resourcedir="%~dp0src\Products\wwwroot" "%~dp0src/Products/bin/%CONFIGURATION%/Products.exe"
+star --resourcedir="%~dp0OrganizationManagementApp\wwwroot" "%~dp0OrganizationManagementApp/bin/%CONFIGURATION%/OrganizationManagementApp.exe"
